@@ -1,0 +1,20 @@
+{
+  "name": "UWBC-EmployeeTracker",
+  "version": "1.0.0",
+  "description": "# Unit 12 MySQL Homework: Employee Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JessicaDao/UWBC-EmployeeTracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JessicaDao/UWBC-EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/JessicaDao/UWBC-EmployeeTracker#readme"
+}
