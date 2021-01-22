@@ -17,35 +17,33 @@ connection.connect(err =>{
 
 })
 
+// the start
 function start(){
     inquirer.prompt({
         name: "start",
         type: "list",
         message: "What would you like to do?",
-        choices: [
-            "View All Employees",
-            "View All Employees By Department",
+        choices: [            
+            "View All Department",
             "View All Roles",
-            "Add Employees",
+            "View All Employees",
             "Add Department",
             "Add Role",
+            "Add Employees",
             "Update Employee Role",
             "Exit"
         ]
     })
     .then(answer => {
         switch(answer){
-            case "View All Employees":
-                viewEmployees()
-                break;
             case "View All Department":
                 viewDepartment()
                 break;
             case "View All Roles":
                 viewRoles()
                 break;
-            case "Add Employees":
-                addEmployees()
+            case "View All Employees":
+                viewEmployees()
                 break;
             case "Add Department":
                 addDepartment()
@@ -53,44 +51,31 @@ function start(){
             case "Add Role":
                 addRole()
                 break;
+            case "Add Employees":
+                addEmployees()
+                break;
             case "Update Employee Role":
                 updateRole()
                 break;
             case "Exit":
                 connection.exit()
                 break;
-        
         }
     })
 }
-
-function viewEmployees(){
-        
-}
+// view employees, departments, and roles
 function viewDepartment(){
 
 }
 function viewRoles(){
 
 }
-function addEmployees(){
-    inquirer.prompt([{
-        name: "firstName",
-        type:"input",
-        message: "What is the emmployee's first name?"
-    },
-    {
-        name: "lastName",
-        type: "input",
-        message: "What is the employee's last name?"
-    },
-    {
-        name: "role",
-        type: "input",
-        message: "What is the employee's role?"
-    }
-])
+function viewEmployees(){
+connection.query(
+    "SELECT employee, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, manager_id from employee JOIN role ON employee.role_id"
+)
 }
+// adds employees, departments and roles
 function addDepartment(){
     inquirer.prompt([{
         name: "department",
@@ -118,6 +103,25 @@ function addRole(){
     }
 ])
 }
+function addEmployees(){
+    inquirer.prompt([{
+        name: "firstName",
+        type:"input",
+        message: "What is the emmployee's first name?"
+    },
+    {
+        name: "lastName",
+        type: "input",
+        message: "What is the employee's last name?"
+    },
+    {
+        name: "role",
+        type: "input",
+        message: "What is the employee's role?"
+    }
+])
+}
+// role update
 function updateRole(){
     
 }
