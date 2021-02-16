@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/JessicaDao/UWBC-EmployeeTracker/issues"
   },
-  "homepage": "https://github.com/JessicaDao/UWBC-EmployeeTracker#readme"
+  "homepage": "https://github.com/JessicaDao/UWBC-EmployeeTracker#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
 }

@@ -7,11 +7,11 @@ const connection = mysql.createConnection({
 
     user: "root",
     password: "password",
-    database: "employees_db"
+    database: "employee_db"
 });
 
 connection.connect(err =>{
-    if(err) thorw err;
+    if(err) throw err;
     console.log("connected as id" + connection.threadId);
     start();
 
@@ -35,7 +35,7 @@ function start(){
         ]
     })
     .then(answer => {
-        switch(answer){
+        switch(answer.start){
             case "View All Department":
                 viewDepartment()
                 break;
@@ -63,19 +63,44 @@ function start(){
         }
     })
 }
-// view employees, departments, and roles
-function viewDepartment(){
 
-}
-function viewRoles(){
+// view departments, roles, and employees
+function viewDepartment() {
+    connection.query(`SELECT name AS "Department List" FROM department`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            track();
+        }
+    })
+};
 
-}
-function viewEmployees(){
-connection.query(
-    "SELECT employee, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, manager_id from employee JOIN role ON employee.role_id"
-)
-}
-// adds employees, departments and roles
+function viewRoles() {
+    connection.query(`SELECT title AS "Role List" FROM roles`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            track();
+        }
+    })
+};
+
+function viewEmployees() {
+    connection.query(`SELECT employee.id, first_name, last_name, department.name AS department, roles.title AS position, salary, manager_id FROM employee JOIN roles ON employee.roles_id = roles.id JOIN department ON roles.department_id = department.id`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            track();
+        }
+    })
+};
+
+
+
+// adds departments, roles, and employees
 function addDepartment(){
     inquirer.prompt([{
         name: "department",
@@ -98,7 +123,7 @@ function addRole(){
     {
         name: "Department",
         type: "list",
-        message: "Choose a department for the role."
+        message: "Choose a department for the role.",
         choices: ""
     }
 ])
