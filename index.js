@@ -64,3 +64,37 @@ function start(){
         }
     })
 }
+
+// view departments, roles, and employees
+function viewDepartment() {
+    connection.query(`SELECT name AS "Department List" FROM department`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            start();
+        }
+    })
+};
+
+function viewRoles() {
+    connection.query(`SELECT title AS "Role List" FROM roles`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            start();
+        }
+    })
+};
+
+function viewEmployees() {
+    connection.query(`SELECT employee.id, first_name, last_name, department.name AS department, roles.title AS position, salary, manager_id FROM employee JOIN roles ON employee.role_id = roles.id JOIN department ON roles.department_id = department.id`, function (err, res) {
+        if (err) {
+            throw err
+        } else {
+            console.table(res);
+            start();
+        }
+    })
+};
